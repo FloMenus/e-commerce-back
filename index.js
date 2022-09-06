@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT;
 const cors = require("cors");
 const ecommerceRoute = require("./routes/ecommerce");
+require('./models/index');
 
 app.use(express.json);
 app.use(cors());
