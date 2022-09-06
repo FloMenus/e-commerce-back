@@ -4,7 +4,7 @@ const { Category, Product } =  require("../models")
 
 // get all categories
 app.get("/", async (req, res) => {
-    const categories = await Category.findAll();
+    const categories = await Category.findAll({});
     res.json(categories);
 });
 

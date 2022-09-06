@@ -5,10 +5,9 @@ const { Product } =  require("../models/index")
 
 // get all products
 app.get("/", async (req, res) => {
-    res.json("coucou")
-    // const products = await Product.findAll()
-    // console.log(products);
-    // res.json(products);
+    const products = await Product.findAll()
+    console.log(products);
+    res.json(products);
 });
 
 // get one product /:id
