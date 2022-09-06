@@ -24,10 +24,10 @@ const Order = require('./order')(sequelize);
 const Category = require('./category')(sequelize);
 
 Category.hasMany(Product);
-Product.hasMany(Category);
+Product.belongsToMany(Category, { through: 'product_category' });
 
 Order.hasMany(Product);
-Product.hasMany(Order);
+Product.belongsToMany(Order, { through: 'order_product' });
 
 
 
