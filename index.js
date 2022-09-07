@@ -10,6 +10,7 @@ const morgan = require("morgan");
 
 app.use(express.json());
 app.use(cors());
+app.use(morgan("tiny"));
 
 app.use('/categories', categoriesRoutes);
 app.use('/products', productsRoutes);
