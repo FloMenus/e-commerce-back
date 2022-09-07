@@ -6,11 +6,9 @@ const cors = require("cors");
 const categoriesRoutes = require("./routes/categories");
 const productsRoutes = require("./routes/products");
 const ordersRoutes = require("./routes/orders");
-const morgan = require("morgan");
 
 app.use(express.json());
 app.use(cors());
-app.use(morgan("tiny"));
 
 app.use('/categories', categoriesRoutes);
 app.use('/products', productsRoutes);
