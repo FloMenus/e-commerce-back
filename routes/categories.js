@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const { Category, Product } =  require("../models")
 
+const { checkIfIdExist, checkIfAlreadyExist } = require("../middlewares/category");
+
 // get all categories
 app.get("/", async (req, res) => {
     const categories = await Category.findAll({});
@@ -9,13 +11,16 @@ app.get("/", async (req, res) => {
 });
 
 // get one category /:id
-app.get("/:id", async (req, res) => {
-    const category = await Category.findOne(req.params.id);
+app.get("/:id", checkIfIdExist, async (req, res) => {
+    const { id } = req.params;
+    const category = await Category.findOne({
+        where: { id },
+    });
     res.json(category);
 });
 
 // get all products from one category /:id_category/products
-app.get("/:id/products", async (req, res) => {
+app.get("/:id/products", checkIfIdExist, async (req, res) => {
     const { id } = req.params;    
     const products = await Product.findAll({
             where: {
@@ -26,13 +31,13 @@ app.get("/:id/products", async (req, res) => {
 });
 
 // create an category
-app.post("/", async (req, res) => {
+app.post("/", checkIfAlreadyExist, async (req, res) => {
     const category = await Category.create(req.body);
     res.json(category);
 })
 
 // modify category /:id
-app.put("/:id", async (req, res) => {
+app.put("/:id", checkIfIdExist, async (req, res) => {
     const { id } = req.params;
     const category = await Category.update(req.body, {
         where: { id }
@@ -42,7 +47,7 @@ app.put("/:id", async (req, res) => {
 )
 
 // delete category /:id
-app.delete("/:id", async (req, res) => { 
+app.delete("/:id", checkIfIdExist, async (req, res) => { 
     const { id } = req.params;
     const category = await Category.destroy({
         where: { id }
