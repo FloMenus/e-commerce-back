@@ -23,6 +23,10 @@ module.exports = (sequelize) => {
     isAvailable: {
       type: DataTypes.BOOLEAN,
     },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
   return Product;
 };

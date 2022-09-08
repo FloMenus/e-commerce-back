@@ -24,7 +24,7 @@ app.get("/:id/products", checkIfIdExist, async (req, res) => {
     const { id } = req.params;    
     const products = await Product.findAll({
             where: {
-            id
+            categoryId:id
             }
         });
         res.json(products);
